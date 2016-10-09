@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+
+<head>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="example.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Launch a Modal from an Alert Demo</h2>
+                <div ng-controller="AlertDemoCtrl as ctrl">
+                    <div style="opacity:0.9; position: absolute;top: 15px;z-index: 2;/*width:40%;max-width: 960px;*/max-width: 600px;margin: 0 auto;left: 0;right: 0;">
+                        <cust-alert alerts="ctrl.alerts"></cust-alert>
+                        <!-- <div uib-alert ng-repeat="alert in ctrl.alerts"
+                            dismiss-on-timeout="alert.timeout"
+                            ng-class="'alert-' + (alert.type || 'warning')"
+                            close="ctrl.closeAlert($index)">
+                            {{alert.msg}}
+                        </div> -->
+                    </div>
+                    <button class='btn btn-default' ng-click="ctrl.addAlert()">Add Alert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="template/alert/alert.html" type="text/ng-template">
+        <div uib-alert ng-repeat="alert in ctrl.alerts"
+            ng-class="'alert-' + (alert.type || 'warning')"
+            close="ctrl.closeAlert($index)">
+            {{alert.msg}}
+        </div>
+    </script>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Modal Fired from an Alert</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+</body>
+
+</html>
